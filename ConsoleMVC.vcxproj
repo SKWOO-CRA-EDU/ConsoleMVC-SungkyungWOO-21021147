@@ -147,10 +147,16 @@
     <ClCompile Include="src\infra\repository\InMemorySampleRepository.cpp" />
     <ClCompile Include="src\infra\repository\InMemoryOrderRepository.cpp" />
     <ClCompile Include="src\app\AppController.cpp" />
+    <ClCompile Include="tests\fakes\FakeInputPort.cpp" />
+    <ClCompile Include="tests\fakes\RecordingOutputPort.cpp" />
+    <ClCompile Include="tests\ControllerScenarioTests.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\domain\Records.h" />
     <ClInclude Include="src\app\AppController.h" />
+    <ClInclude Include="tests\fakes\FakeInputPort.h" />
+    <ClInclude Include="tests\fakes\RecordingOutputPort.h" />
+    <ClInclude Include="tests\ControllerScenarioTests.h" />
     <ClInclude Include="src\infra\repository\InMemorySampleRepository.h" />
     <ClInclude Include="src\infra\repository\InMemoryOrderRepository.h" />
     <ClInclude Include="src\ports\ISampleRepository.h" />
