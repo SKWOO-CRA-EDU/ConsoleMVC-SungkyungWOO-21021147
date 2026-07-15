@@ -26,6 +26,10 @@ msbuild ConsoleMVC.vcxproj /p:Configuration=Release /p:Platform=x64
 계약을 고쳐야 할 이유를 발견하면(예: 계약이 PRD의 명제를 만족시키기 불가능하게 만드는 경우) 코드로
 우회하지 말고, 그 사실을 사용자에게 보고하고 작업을 멈춘다.
 
+- CONTRACT.md 는 SampleOrderSystem 에서만 개정된다. 여기 것은 읽기 전용 사본이다.
+- 계약 공백을 발견하면 코드로 우회하지 말고 BLOCKED 항목으로 보고하고 멈춘다.
+- 작업 시작 시 CONTRACT.md 의 버전을 확인한다.
+
 ## 커밋 규칙
 
 - Conventional Commits 형식 사용: `feat:`, `fix:`, `docs:`, `refactor:`, `test:` 등.
