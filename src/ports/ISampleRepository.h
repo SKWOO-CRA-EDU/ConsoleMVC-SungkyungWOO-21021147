@@ -10,7 +10,7 @@ public:
     virtual ~ISampleRepository() = default;
     virtual std::optional<SampleRecord> FindById(const std::string& sampleId) const = 0;
     virtual std::vector<SampleRecord> FindAll() const = 0;
-    virtual bool Exists(const std::string& sampleId) const = 0;
-    virtual void Add(const SampleRecord& sample) = 0;
-    virtual void Update(const SampleRecord& sample) = 0;
+    virtual WriteOutcome Add(const SampleRecord& sample) = 0;
+    virtual WriteOutcome Update(const SampleRecord& sample) = 0;
+    virtual WriteOutcome Delete(const std::string& sampleId) = 0;
 };

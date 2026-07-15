@@ -61,7 +61,14 @@ bool AppController::HandleSampleForm(const std::string& line) {
         return true;
     }
 
-    samples_.Add(record);
+    WriteOutcome outcome = samples_.Add(record);
+    if (outcome != WriteOutcome::Ok) {
+        output_.OnError("DUPLICATE_SAMPLE_ID", record.sampleId);
+        state_ = State::MainMenu;
+        output_.ShowMainMenu();
+        return true;
+    }
+
     output_.OnSampleRegistered(record);
     state_ = State::MainMenu;
     output_.ShowMainMenu();

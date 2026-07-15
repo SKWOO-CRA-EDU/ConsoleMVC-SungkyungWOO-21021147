@@ -28,7 +28,7 @@ void TestValidSampleRegistration() {
 
     controller.Run();
 
-    Expect(samples.Exists("S1"), "sample S1 should be registered in repository");
+    Expect(samples.FindById("S1").has_value(), "sample S1 should be registered in repository");
 
     bool foundRegisteredEvent = false;
     for (const auto& e : output.events) {

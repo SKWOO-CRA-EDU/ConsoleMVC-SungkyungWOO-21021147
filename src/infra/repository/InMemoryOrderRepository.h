@@ -8,12 +8,11 @@ class InMemoryOrderRepository : public IOrderRepository {
 public:
     std::optional<OrderRecord> FindById(int64_t orderId) const override;
     std::vector<OrderRecord> FindAll() const override;
-    std::vector<OrderRecord> FindByStatus(const std::string& status) const override;
-    int64_t NextOrderId() const override;
-    void Add(const OrderRecord& order) override;
-    void Update(const OrderRecord& order) override;
+    std::vector<OrderRecord> FindByStatus(OrderStatus status) const override;
+    std::vector<OrderRecord> FindBySampleId(const std::string& sampleId) const override;
+    WriteOutcome Add(const OrderRecord& order) override;
+    WriteOutcome Update(const OrderRecord& order) override;
 
 private:
     std::unordered_map<int64_t, OrderRecord> records_;
-    int64_t nextId_ = 1;
 };

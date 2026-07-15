@@ -15,7 +15,7 @@ std::vector<OrderRecord> InMemoryOrderRepository::FindAll() const {
     return result;
 }
 
-std::vector<OrderRecord> InMemoryOrderRepository::FindByStatus(const std::string& status) const {
+std::vector<OrderRecord> InMemoryOrderRepository::FindByStatus(OrderStatus status) const {
     std::vector<OrderRecord> result;
     for (const auto& [id, record] : records_) {
         if (record.status == status) result.push_back(record);
@@ -23,17 +23,23 @@ std::vector<OrderRecord> InMemoryOrderRepository::FindByStatus(const std::string
     return result;
 }
 
-int64_t InMemoryOrderRepository::NextOrderId() const {
-    return nextId_;
-}
-
-void InMemoryOrderRepository::Add(const OrderRecord& order) {
-    records_[order.orderId] = order;
-    if (order.orderId >= nextId_) {
-        nextId_ = order.orderId + 1;
+std::vector<OrderRecord> InMemoryOrderRepository::FindBySampleId(const std::string& sampleId) const {
+    std::vector<OrderRecord> result;
+    for (const auto& [id, record] : records_) {
+        if (record.sampleId == sampleId) result.push_back(record);
     }
+    return result;
 }
 
-void InMemoryOrderRepository::Update(const OrderRecord& order) {
+WriteOutcome InMemoryOrderRepository::Add(const OrderRecord& order) {
+    if (records_.find(order.orderId) != records_.end()) return WriteOutcome::DuplicateKey;
     records_[order.orderId] = order;
+    return WriteOutcome::Ok;
+}
+
+WriteOutcome InMemoryOrderRepository::Update(const OrderRecord& order) {
+    auto it = records_.find(order.orderId);
+    if (it == records_.end()) return WriteOutcome::NotFound;
+    it->second = order;
+    return WriteOutcome::Ok;
 }

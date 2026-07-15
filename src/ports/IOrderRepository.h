@@ -11,8 +11,8 @@ public:
     virtual ~IOrderRepository() = default;
     virtual std::optional<OrderRecord> FindById(int64_t orderId) const = 0;
     virtual std::vector<OrderRecord> FindAll() const = 0;
-    virtual std::vector<OrderRecord> FindByStatus(const std::string& status) const = 0;
-    virtual int64_t NextOrderId() const = 0;
-    virtual void Add(const OrderRecord& order) = 0;
-    virtual void Update(const OrderRecord& order) = 0;
+    virtual std::vector<OrderRecord> FindByStatus(OrderStatus status) const = 0;
+    virtual std::vector<OrderRecord> FindBySampleId(const std::string& sampleId) const = 0;
+    virtual WriteOutcome Add(const OrderRecord& order) = 0;
+    virtual WriteOutcome Update(const OrderRecord& order) = 0;
 };

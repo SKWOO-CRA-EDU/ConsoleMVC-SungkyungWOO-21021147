@@ -8,9 +8,9 @@ class InMemorySampleRepository : public ISampleRepository {
 public:
     std::optional<SampleRecord> FindById(const std::string& sampleId) const override;
     std::vector<SampleRecord> FindAll() const override;
-    bool Exists(const std::string& sampleId) const override;
-    void Add(const SampleRecord& sample) override;
-    void Update(const SampleRecord& sample) override;
+    WriteOutcome Add(const SampleRecord& sample) override;
+    WriteOutcome Update(const SampleRecord& sample) override;
+    WriteOutcome Delete(const std::string& sampleId) override;
 
 private:
     std::unordered_map<std::string, SampleRecord> records_;

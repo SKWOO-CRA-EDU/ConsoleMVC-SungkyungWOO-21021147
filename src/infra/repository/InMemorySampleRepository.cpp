@@ -15,14 +15,22 @@ std::vector<SampleRecord> InMemorySampleRepository::FindAll() const {
     return result;
 }
 
-bool InMemorySampleRepository::Exists(const std::string& sampleId) const {
-    return records_.find(sampleId) != records_.end();
+WriteOutcome InMemorySampleRepository::Add(const SampleRecord& sample) {
+    if (records_.find(sample.sampleId) != records_.end()) return WriteOutcome::DuplicateKey;
+    records_[sample.sampleId] = sample;
+    return WriteOutcome::Ok;
 }
 
-void InMemorySampleRepository::Add(const SampleRecord& sample) {
-    records_[sample.sampleId] = sample;
+WriteOutcome InMemorySampleRepository::Update(const SampleRecord& sample) {
+    auto it = records_.find(sample.sampleId);
+    if (it == records_.end()) return WriteOutcome::NotFound;
+    it->second = sample;
+    return WriteOutcome::Ok;
 }
 
-void InMemorySampleRepository::Update(const SampleRecord& sample) {
-    records_[sample.sampleId] = sample;
+WriteOutcome InMemorySampleRepository::Delete(const std::string& sampleId) {
+    auto it = records_.find(sampleId);
+    if (it == records_.end()) return WriteOutcome::NotFound;
+    records_.erase(it);
+    return WriteOutcome::Ok;
 }
