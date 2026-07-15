@@ -150,10 +150,14 @@
     <ClCompile Include="tests\fakes\FakeInputPort.cpp" />
     <ClCompile Include="tests\fakes\RecordingOutputPort.cpp" />
     <ClCompile Include="tests\ControllerScenarioTests.cpp" />
+    <ClCompile Include="src\infra\console\ConsoleInputAdapter.cpp" />
+    <ClCompile Include="src\infra\console\ConsoleOutputAdapter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\domain\Records.h" />
     <ClInclude Include="src\app\AppController.h" />
+    <ClInclude Include="src\infra\console\ConsoleInputAdapter.h" />
+    <ClInclude Include="src\infra\console\ConsoleOutputAdapter.h" />
     <ClInclude Include="tests\fakes\FakeInputPort.h" />
     <ClInclude Include="tests\fakes\RecordingOutputPort.h" />
     <ClInclude Include="tests\ControllerScenarioTests.h" />
