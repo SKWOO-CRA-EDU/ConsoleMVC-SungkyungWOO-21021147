@@ -141,6 +141,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\domain\Records.h" />
+    <ClInclude Include="src\ports\ISampleRepository.h" />
+    <ClInclude Include="src\ports\IOrderRepository.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
