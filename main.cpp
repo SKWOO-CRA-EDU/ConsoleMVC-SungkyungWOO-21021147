@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 #include <string>
 #include "tests/ControllerScenarioTests.h"
 #include "src/app/AppController.h"
@@ -6,6 +7,7 @@
 #include "src/infra/repository/InMemoryOrderRepository.h"
 #include "src/infra/console/ConsoleInputAdapter.h"
 #include "src/infra/console/ConsoleOutputAdapter.h"
+#include "src/infra/console/PlainConsoleOutputAdapter.h"
 
 // Composition Root: 구체 구현체를 생성해 AppController에 주입한다.
 // Model/Controller가 아닌 이 파일만 어떤 어댑터를 쓸지 안다.
@@ -23,12 +25,18 @@ int main(int argc, char** argv)
         }
     }
 
+    std::unique_ptr<IOutputPort> output = std::make_unique<ConsoleOutputAdapter>();
+    for (int i = 1; i < argc; ++i) {
+        if (std::string(argv[i]) == "--view=plain") {
+            output = std::make_unique<PlainConsoleOutputAdapter>();
+        }
+    }
+
     InMemorySampleRepository samples;
     InMemoryOrderRepository orders;
     ConsoleInputAdapter input;
-    ConsoleOutputAdapter output;
 
-    AppController controller(input, output, samples, orders);
+    AppController controller(input, *output, samples, orders);
     controller.Run();
     return 0;
 }
